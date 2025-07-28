@@ -6,19 +6,17 @@
   <body>
       <div>
         <p>Youtube Subscribe Button </p>
-        <button class="subscribe-button">subscribe</button>
+        <button class="subscribe-button" onclick="subscribe()">subscribe</button>
       </div>
       <script>
-        const buttonElement = document.querySelector('.subscribe-button');
-        buttonElement.addEventListener('click', function() {
+        function subscribe() {
+          const buttonElement = document.querySelector('.subscribe-button');
           if (buttonElement.innerHTML === 'subscribe') {
-          buttonElement.innerHTML = 'subscribed';
-        }
-        else {
-          buttonElement.innerHTML = 'subscribe';
-        }
+            buttonElement.innerHTML = 'subscribed';
+          } else {
+            buttonElement.innerHTML = 'subscribe';
+          }
       }
-    )
-      </script>
+    </script>
   </body>
 </html>
