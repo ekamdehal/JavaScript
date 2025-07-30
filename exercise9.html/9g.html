@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DOM projects</title>
+    <title>Exercise 9g</title>
   </head>
   <body>
       <div>
-
         <p>Amazon Shipping Calculator</p>
         <input placeholder="Cost of order"
           class="js-cost-input" onkeydown="handleCostKeydown(event)">
@@ -33,7 +32,7 @@
             cost = cost + 10;
           }
 
-          document.querySelector('.js-total-cost').innerHTML = `Total cost: $${cost}`;
+          document.querySelector('.js-total-cost').innerHTML = `Total cost: ${cost.toFixed(2)}`;
         }
 
         function subscribe() {
