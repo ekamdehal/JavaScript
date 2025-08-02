@@ -6,7 +6,15 @@
     <title>Exercise 9d</title>
 </head>
 <body>
-  <input class="name" placeholder="Type something" onkeyup="">
+  <input class="name" placeholder="Type something" onkeyup="typeText(event)">
   <p class="display"></p>
 </body>
+<script>
+  const input = document.querySelector('.name');
+  const display = document.querySelector('.display');
+
+  function typeText(event) {
+      display.innerHTML = input.value;
+  }
+</script>
 </html>
