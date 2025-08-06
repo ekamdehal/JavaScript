@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Arrays and Loops</title>
+  </head>
+  <body>
+    <script>
+      let arr = [5,10,15,20];
+      arr.splice(0,1,1);
+      console.log(arr);
+
+      let arr2 = [1,2,3,4,5];
+      let arr3 = arr2.slice(0,3);
+      console.log(arr3);
+
+      arr = ['a', 'b', 'c', 'd'];
+      // Use splice() to remove 'd'
+      arr.splice(3,1);
+
+      arr = [1, 2, 4, 5];
+      // Use splice() to insert 3 between 2 and 4
+      arr.splice(2, 2, 0, 0);
+      console.log(arr);
+
+      arr = ['apple', 'banana', 'cherry'];
+      arr.splice(1,1,'orange');
+      console.log(arr);
+
+      arr = [100, 200, 300, 400];
+      arr.shift();
+      arr.shift();
+      console.log(arr);
+    </script>
+  </body>
+</html>

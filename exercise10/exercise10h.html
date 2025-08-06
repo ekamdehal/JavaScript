@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM projects</title>
+    <style>
+      .subscribe-button {
+        border: none;
+        background-color: black;
+        color: white;
+        border-radius: 50px;
+        padding: 10px 15px;
+        cursor: pointer;
+      }
+
+      .subscribed-button {
+        border: none;
+        background-color: rgb(218, 216, 216);
+        color: black;
+        border-radius: 50px;
+        padding: 10px 15px;
+        cursor: pointer;
+      }
+
+      .cost-input {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      .calculate-button {
+        padding: 12px 15px;
+        background-color: green;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .calculate-button:hover {
+        background-color: darkgreen;
+      }
+
+      .total-cost-error {
+        color: red;
+      }
+
+    </style>
+  </head>
+  <body>
+      <div>
+        <p>Amazon Shipping Calculator</sp>
+        <input placeholder="Cost of order"
+          class="js-cost-input cost-input" onkeydown="handleCostKeydown(event)">
+          <button class="js-calculate-button calculate-button" onclick="
+            calculateTotal();"
+            >Calculate</button>
+          <p class ="js-total-cost total-cost"></p>
+      </div>
+      <script>
+        function handleCostKeydown(event) {
+          if (event.key === 'Enter') {
+            calculateTotal();
+          }
+        }
+
+        function calculateTotal() {
+          const inputElement = document.querySelector('.js-cost-input');
+          let cost = Number(inputElement.value);
+
+          if (isNaN(cost)) {
+            displayError(1);
+            return;
+          }
+
+          if (cost < 0) {
+            displayError(0);
+            return;
+          }
+
+          if (cost < 40) {
+            cost = cost + 10;
+          }
+
+          document.querySelector('.js-total-cost').classList.remove('total-cost-error');
+          document.querySelector('.js-total-cost').innerHTML = `Total cost: $${cost}`;
+        }
+
+        function displayError(argument) {
+          if (argument === 1) {
+          document.querySelector('.js-total-cost').innerHTML = 'Please enter a valid number';
+          document.querySelector('.js-total-cost').classList.add('total-cost-error');
+          }
+
+          if (argument == 0) {
+          document.querySelector('.js-total-cost').innerHTML = 'Error: cost cannot be less than $0';
+          document.querySelector('.js-total-cost').classList.add('total-cost-error');
+          }
+        }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calculation-display {
+  font-size: 50px;
+  margin: 0;
+}
+
+.clear-button {
+  font-size: 17px;
+}
+
+button {
+  border-radius: 50%;
+  background-color: rgb(61, 58, 58);
+  font-size: 25px;
+  height: 60px;
+  width: 60px;
+  color: white;
+  border: none;
+  margin-right: 5px;
+}
+
+button:hover {
+  background-color: rgb(32, 29, 29);
+  cursor: pointer;
+}
+
+.operator {
+  background-color: orange;
+}
+
+.operator:hover {
+  background-color: rgb(172, 114, 6)
+}
