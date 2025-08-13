@@ -39,7 +39,6 @@
       run(function() {
         console.log('hello4');
       });
-      */
 
       setTimeout(function() {
         console.log('timeout');
@@ -53,6 +52,20 @@
       }, 1000);
       
       console.log('next line 2');
+
+      */
+
+      ['hello',
+        'goodbye',
+        'goodnight'
+      ].forEach(function(value, index) {
+        if (value === 'hello') {
+          return;
+        }
+        console.log(value);
+        console.log(index);
+      });
+
     </script>
   </body>
 </html>
