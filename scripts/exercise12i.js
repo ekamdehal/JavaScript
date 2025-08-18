@@ -1,0 +1,41 @@
+let messages = 0;
+let id = null;
+let isDisplayingNotification = false;
+
+function add(){
+  messages++;
+  displayNotification();
+}
+
+function remove() {
+  if (messages > 0) {
+  messages--
+  }
+
+  if (messages === 0) {
+    stopNotification();
+  }
+}
+
+function displayNotification() {
+  if (isDisplayingNotification) {
+    return
+  }
+
+  isDisplayingNotification = true;
+
+  id = setInterval(function(){
+  if (document.title === 'App') {
+  document.title = `(${messages}) new messages`
+  } else {
+    document.title = 'App'
+  }
+  }, 2000)
+}
+
+function stopNotification() {
+  isDisplayingNotification = false;
+  clearInterval(id);
+  id = null;
+  document.title = 'App';
+}
