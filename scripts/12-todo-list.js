@@ -6,6 +6,8 @@ const todoList = [{
   dueDate: '2022-12-22'
 }];
 
+document.querySelector('.js-addbutton').addEventListener('click', addTodo);
+
 function addTodo() {
   const inputElement = document.querySelector('.js-name-input');
   const name = inputElement.value;
