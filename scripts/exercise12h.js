@@ -1,16 +1,16 @@
 let messages = 0
 
-function add(){
+add = () => {
   messages++
 }
 
-function remove() {
+remove = () => {
   if (messages > 0) {
   messages--
   }
 }
 
-setInterval(function(){
+setInterval(() => {
   if (document.title === 'App') {
   document.title = `(${messages}) new messages`
   } else {

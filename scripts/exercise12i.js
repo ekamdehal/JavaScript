@@ -2,12 +2,12 @@ let messages = 0;
 let id = null;
 let isDisplayingNotification = false;
 
-function add(){
+add = () => {
   messages++;
   displayNotification();
 }
 
-function remove() {
+remove = () => {
   if (messages > 0) {
   messages--
   }
@@ -17,14 +17,14 @@ function remove() {
   }
 }
 
-function displayNotification() {
+displayNotification = () => {
   if (isDisplayingNotification) {
     return
   }
 
   isDisplayingNotification = true;
 
-  id = setInterval(function(){
+  id = setInterval(() => {
   if (document.title === 'App') {
   document.title = `(${messages}) new messages`
   } else {
@@ -33,7 +33,7 @@ function displayNotification() {
   }, 2000)
 }
 
-function stopNotification() {
+stopNotification = () => {
   isDisplayingNotification = false;
   clearInterval(id);
   id = null;

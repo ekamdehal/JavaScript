@@ -1,12 +1,15 @@
-function start() {
-  document.querySelector('.js-button').innerHTML = 'Loading...'
+buttonElement = document.querySelector('.js-button');
+
+start = () => {
+  buttonElement.innerHTML = 'Loading...'
   setTimeout(finished, 1000)
 }
 
-function finished() {
-  document.querySelector('.js-button').innerHTML = 'Finished' 
+finished = () => {
+  buttonElement.innerHTML = 'Finished'
 }
 
+buttonElement.addEventListener('click', start);
 
 
 

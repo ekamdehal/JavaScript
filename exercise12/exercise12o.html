@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exercise 12o</title>
+  </head>
+  <body>
+    <script>
+
+      function removeEgg(foods) {
+        let count = 0;
+        return foods.filter(value => {
+          if (value === 'egg' && count < 2) {
+            count++;
+            return false
+          } else {
+            return true;
+          }
+        })
+      }
+
+      console.log(removeEgg(['egg','apple','egg','egg','ham']));
+      
+    </script>
+  </body>
+</html>

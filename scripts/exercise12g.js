@@ -1,4 +1,4 @@
-setInterval(function(){
+setInterval(() => {
   if (document.title === 'App') {
   document.title = '(2) new messages'
   } else {

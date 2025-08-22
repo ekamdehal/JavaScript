@@ -1,10 +1,10 @@
-function runTwice(fun) {
+runTwice = (fun) => {
   fun();
   fun();
 }
 
-let add = function() {
+let add = () => {
   console.log(2 + 3)
 }
 
-runTwice(add());
+runTwice(add);

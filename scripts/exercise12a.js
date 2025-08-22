@@ -1,6 +1,6 @@
-let add = function() {
+let add = () => {
   console.log(2 + 3)
 }
 
-add()
-add()
+add();
+add();

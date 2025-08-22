@@ -1,10 +1,10 @@
 let timeoutId;
 
-function addToCart() {
+addToCart = () => {
   clearTimeout(timeoutId)
   const message = document.querySelector('.added-message')
   message.innerHTML = 'Added'
-  timeoutId = setTimeout(function() {
+  timeoutId = setTimeout(() => {
     message.innerHTML = ''
   }, 2000)
 }
