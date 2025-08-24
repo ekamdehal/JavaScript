@@ -17,3 +17,6 @@ setInterval(() => {
     document.title = 'App'
   }
 }, 2000)
+
+document.querySelector('.js-add-button').addEventListener('click', add)
+document.querySelector('.js-remove-button').addEventListener('click', remove)

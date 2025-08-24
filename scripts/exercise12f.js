@@ -9,4 +9,6 @@ addToCart = () => {
   }, 2000)
 }
 
+document.querySelector('.js-button').addEventListener('click', addToCart);
+
 
