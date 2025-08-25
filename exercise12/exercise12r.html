@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <head>
     <title>Rock Paper Scissors</title>
-    <link rel="stylesheet" href="../styles/12-rock-paper-scissors.css">
+    <link rel="stylesheet" href="../styles/exercise12r.css">
   </head>
   <body>
 
@@ -26,16 +26,12 @@
     <p class="js-score score">
     </p>
 
-    <button onclick="
-      score.wins = 0;
-      score.losses = 0;
-      score.ties = 0;
-      localStorage.removeItem('score');
-      updateScoreElement();
-    " class="reset-score-button">Reset Score</button>
+    <button class="reset-score-button js-reset-score-button">Reset Score</button>
 
-    <button class="auto-play-button" onclick="autoPlay()">Auto Play</button>
+    <button class="auto-play-button js-auto-play-button">Auto Play</button>
 
-    <script src="../scripts/12-rock-paper-scissors.js"></script>
+    <div class="reset-confirmation js-reset-confirmation"></div>
+
+    <script src="../scripts/exercise12r.js"></script>
   </body>
 </html>
