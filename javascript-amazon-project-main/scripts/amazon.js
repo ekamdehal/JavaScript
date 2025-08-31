@@ -1,7 +1,5 @@
-import {cart, addToCart} from './cart.js';
-import {products} from '../data/products.js';
-
-console.log("Hello, Amazon!");
+import { cart, addToCart } from './cart.js';
+import { products } from '../data/products.js';
 
 let productsHTML = '';
 
@@ -59,8 +57,6 @@ products.forEach((product) => {
       productsHTML += html;
 });
 
-console.log(productsHTML);
-
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
 const timeouts = {};
@@ -76,10 +72,8 @@ function updateCartQuantity() {
   document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 }
 
-  // Update the cart quantity display
-  updateCartQuantity();
-
-  // Show the "Added" message temporarily
+// Shows "Added" message for 2 seconds
+function showAddedMessage(productId) {
   if (timeouts[productId]) {
     clearTimeout(timeouts[productId]);
   }
@@ -90,6 +84,7 @@ function updateCartQuantity() {
   timeouts[productId] = setTimeout(() => {
     addedMessage.classList.remove('visible');
   }, 2000);
+}
 
 // Event listener for Add to Cart buttons
 document.querySelectorAll('.js-add-to-cart')
@@ -102,5 +97,7 @@ document.querySelectorAll('.js-add-to-cart')
       const selectedQuantity = Number(quantitySelector.value);
 
       addToCart(productId, selectedQuantity);
+      updateCartQuantity();
+      showAddedMessage(productId);
     });
   });
