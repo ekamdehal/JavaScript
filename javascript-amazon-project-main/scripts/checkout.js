@@ -110,5 +110,5 @@ document.querySelectorAll('.js-delete-link').forEach((link) =>{
   });
 });
 
-
-
+document.querySelector('.js-checkout-header-middle-section').innerHTML += `(<a class="return-to-home-link"
+  href="amazon.html"></a>)`;

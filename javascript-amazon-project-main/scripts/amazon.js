@@ -64,6 +64,7 @@ const timeouts = {};
 
 // Updates the cart quantity in the header
 function updateCartQuantity() {
+
   let cartQuantity = 0;
 
   cart.forEach((item) => {
@@ -102,3 +103,5 @@ document.querySelectorAll('.js-add-to-cart')
       showAddedMessage(productId);
     });
   });
+
+  updateCartQuantity();

@@ -37,6 +37,7 @@ function saveToStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
+// removes a product from the cart
 export function removeFromCart(productId) {
   const newCart = [];
 
