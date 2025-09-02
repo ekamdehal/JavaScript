@@ -107,6 +107,7 @@ document.querySelectorAll('.js-delete-link').forEach((link) =>{
 
     const container = document.querySelector(`.js-cart-item-container-${productId}`);
     container.remove();
+    updateCheckoutQuantity();
   });
 });
 
@@ -118,7 +119,7 @@ function updateCheckoutQuantity() {
   });
 
   if (checkoutQuantity === 0) {
-    document.querySelector('.js-checkout-header-middle-section').innerHTML = '';
+    document.querySelector('.js-checkout-header-middle-section').innerHTML = 'Checkout (<a class="return-to-home-link" href="amazon.html">...</a>)';
   } else {
     document.querySelector('.js-checkout-header-middle-section').innerHTML = `
       Checkout (<a class="return-to-home-link" href="amazon.html">${checkoutQuantity} items</a>)
