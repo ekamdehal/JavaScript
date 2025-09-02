@@ -110,5 +110,20 @@ document.querySelectorAll('.js-delete-link').forEach((link) =>{
   });
 });
 
-document.querySelector('.js-checkout-header-middle-section').innerHTML += `(<a class="return-to-home-link"
-  href="amazon.html"></a>)`;
+function updateCheckoutQuantity() {
+  let checkoutQuantity = 0;
+
+  cart.forEach((item) => {
+    checkoutQuantity += item.quantity;
+  });
+
+  if (checkoutQuantity === 0) {
+    document.querySelector('.js-checkout-header-middle-section').innerHTML = '';
+  } else {
+    document.querySelector('.js-checkout-header-middle-section').innerHTML = `
+      Checkout (<a class="return-to-home-link" href="amazon.html">${checkoutQuantity} items</a>)
+    `;
+  }
+}
+
+updateCheckoutQuantity();

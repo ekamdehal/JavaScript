@@ -71,7 +71,11 @@ function updateCartQuantity() {
     cartQuantity += item.quantity;
   });
 
-  document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+  if (cartQuantity === 0) {
+    document.querySelector('.js-cart-quantity').innerHTML = '';
+  } else {
+    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+  }
 }
 
 // Shows "Added" message for 2 seconds
