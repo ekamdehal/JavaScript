@@ -209,3 +209,32 @@
   margin-top: 11px;
   margin-bottom: 15px;
 }
+
+.quantity-input {
+  display: none;
+  width: 30px;
+}
+
+.save-quantity-link {
+  display: none;
+}
+
+.cart-item-container.is-editing-quantity .quantity-input {
+  display: initial;
+}
+
+.cart-item-container.is-editing-quantity .save-quantity-link {
+  display: initial;
+}
+
+.cart-item-container.is-editing-quantity .update-quantity-link {
+  display: none;
+}
+
+.cart-item-container.is-editing-quantity .quantity-label {
+  display: none;
+}
+
+.cart-item-container.has-error .quantity-input {
+  border: 1px solid red;
+}
