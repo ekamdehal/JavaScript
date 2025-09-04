@@ -13,14 +13,20 @@ cart.forEach((cartItem) => {
   const productId = cartItem.productId;
   let matchingProduct;
 
+  // 
+
   products.forEach((product) => {
     if (product.id === productId) {
       matchingProduct = product;
     }
   });
 
+  // 
+
   const deliveryOption = deliveryOptions.find(option => option.id === cartItem.deliveryOptionId);
   const deliveryDate = dayjs().add(deliveryOption.deliveryDays, 'days');
+
+  // 
 
   cartSummaryHTML += `
     <div class="cart-item-container js-cart-item-container-${cartItem.productId}">
@@ -61,6 +67,7 @@ cart.forEach((cartItem) => {
           Choose a delivery option:
         </div>
 
+        // 
         <div class="delivery-option">
           <input type="radio"  ${cartItem.deliveryOptionId === '1' ? 'checked' : ''}
             class="delivery-option-input"
@@ -106,9 +113,12 @@ cart.forEach((cartItem) => {
   console.log(cartItem.productId, cartItem.deliveryOptionId);
 });
 
+// 
+
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
-// Delete handlers
+// 
+
 document.querySelectorAll('.js-delete-link').forEach((link) => {
   link.addEventListener('click', () => {
     const productId = link.dataset.productId;
@@ -121,6 +131,7 @@ document.querySelectorAll('.js-delete-link').forEach((link) => {
 });
 
 function updateCheckoutQuantity() {
+  // 
   let checkoutQuantity = 0;
 
   cart.forEach((item) => {
@@ -137,7 +148,8 @@ function updateCheckoutQuantity() {
   }
 }
 
-// Handle update clicks
+// 
+
 document.querySelectorAll('.js-update-link').forEach((link) => {
   link.addEventListener('click', () => {
     const productId = link.dataset.productId;
@@ -146,6 +158,8 @@ document.querySelectorAll('.js-update-link').forEach((link) => {
       .classList.add('is-editing-quantity');
   });
 });
+
+// 
 
 document.querySelectorAll('.js-save-link').forEach((link) => {
   link.addEventListener('click', () => {
@@ -157,31 +171,30 @@ document.querySelectorAll('.js-save-link').forEach((link) => {
     const quantityInput = container.querySelector('.quantity-input');
     const newQuantity = Number(quantityInput.value);
 
-    let valid = true; // start assuming input is valid
+    let valid = true; 
 
     if (newQuantity === 0) {
-      // remove the item from cart if new quantity is 0
       removeFromCart(productId);
       container.remove();
       updateCheckoutQuantity();
-      return; // stop here
+      return; 
     }
 
     if (newQuantity < 0 || newQuantity > 1000 || isNaN(newQuantity)) {
-      // out of bounds or not a number
       valid = false;
       container.classList.add('has-error');
       container.classList.add('is-editing-quantity');
     }
 
     if (valid) {
-      // update cart + UI
       updateQuantity(productId, newQuantity);
       container.querySelector('.quantity-label').textContent = newQuantity;
       updateCheckoutQuantity();
     }
   });
 });
+
+// 
 
 document.querySelectorAll('.js-delivery-option').forEach((element) => {
   element.addEventListener('click', () => {
@@ -190,5 +203,7 @@ document.querySelectorAll('.js-delivery-option').forEach((element) => {
     updateDeliveryOption(productId, deliveryOptionId);
   });
 });
+
+// 
 
 updateCheckoutQuantity();
