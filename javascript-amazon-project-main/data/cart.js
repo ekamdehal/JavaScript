@@ -42,16 +42,13 @@ function saveToStorage() {
 
 // removes a product from the cart
 export function removeFromCart(productId) {
-  const newCart = [];
-
-  cart.forEach((cartItem) => {
-    if (cartItem.productId !== productId) {
-      newCart.push(cartItem);
-    }
-  });
-  cart = newCart;
+  const index = cart.findIndex(item => item.productId === productId);
+  if (index !== -1) {
+    cart.splice(index, 1); // mutates the existing array
+  }
   saveToStorage();
 }
+
 
 export function updateQuantity(productId, newQuantity) {
   cart.forEach((item) => {

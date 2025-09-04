@@ -15,16 +15,14 @@ function renderOrderSummary(cart) {
     const productId = cartItem.productId;
     let matchingProduct;
 
-  // 
-
+  // loop through products to find the matching product
   products.forEach((product) => {
     if (product.id === productId) {
       matchingProduct = product;
     }
   });
 
-  // 
-
+  // generate the dates 
   const deliveryOption = deliveryOptions.find(option => option.id === cartItem.deliveryOptionId);
   const deliveryDate = dayjs().add(deliveryOption.deliveryDays, 'days');
 
@@ -32,7 +30,7 @@ function renderOrderSummary(cart) {
   const deliveryDate2 = dayjs().add(3, 'days');
   const deliveryDate3 = dayjs().add(1, 'days');
 
-  // 
+  // generate the HTML for the cart summary
 
   cartSummaryHTML += `
     <div class="cart-item-container js-cart-item-container-${cartItem.productId}">
@@ -122,13 +120,10 @@ function renderOrderSummary(cart) {
   // Update the checkout quantity
   updateCheckoutQuantity();
 
-  };
-
   document.querySelectorAll('.js-delete-link').forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productId;
       removeFromCart(productId);
-
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.remove();
       updateCheckoutQuantity();
@@ -151,6 +146,7 @@ function renderOrderSummary(cart) {
         Checkout (<a class="return-to-home-link" href="amazon.html">${checkoutQuantity} items</a>)
       `;
     }
+  }
 
   // handles quantity updates
   document.querySelectorAll('.js-update-link').forEach((link) => {
