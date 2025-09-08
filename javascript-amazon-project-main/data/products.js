@@ -1,3 +1,12 @@
+export function getProduct(productId) {
+  return products.find(product => product.id === productId);
+}
+
+export function getProductPrice(productId) {
+  const product = products.find(product => product.id === productId);
+  return product ? product.priceCents : null;
+}
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
