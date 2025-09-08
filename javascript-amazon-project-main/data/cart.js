@@ -71,3 +71,28 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
   matchingItem.deliveryOptionId = deliveryOptionId;
   saveToStorage();
 }
+
+
+function getShippingCostForDeliveryOption(deliveryOptionId) {
+  let shippingCost = 0;
+
+  if (deliveryOptionId === '1') { 
+    shippingCost = 0;
+  } else if (deliveryOptionId === '2') {
+    shippingCost = 499;
+  } else if (deliveryOptionId === '3') {
+    shippingCost = 999;
+  }
+
+  return shippingCost;
+}
+
+export function getShippingCost(cart) {
+  let totalShippingCost = 0;
+
+  cart.forEach((item) => {
+    totalShippingCost += getShippingCostForDeliveryOption(item.deliveryOptionId);
+  });
+
+  return totalShippingCost;
+}
