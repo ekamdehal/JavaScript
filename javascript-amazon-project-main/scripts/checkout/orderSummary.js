@@ -4,6 +4,7 @@ import {formatCurrency} from '../utils/money.js';
 import { deliveryOptions } from '../../data/deliveryOptions.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { renderPaymentSummary } from './paymentSummary.js';
+import { renderCheckoutSummary } from './checkoutHeader.js';
 
 export function renderOrderSummary() {
 
@@ -108,36 +109,15 @@ export function renderOrderSummary() {
   // Render the order summary
   document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
-  // Update the checkout quantity
-  updateCheckoutQuantity();
-
   document.querySelectorAll('.js-delete-link').forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productId;
       removeFromCart(productId);
       renderOrderSummary();
-      updateCheckoutQuantity();
+      renderCheckoutSummary();
       renderPaymentSummary();
     });
   });
-
-  function updateCheckoutQuantity() {
-    // Update the checkout quantity display
-    let checkoutQuantity = 0;
-
-    cart.forEach((item) => {
-      checkoutQuantity += item.quantity;
-    });
-
-    if (checkoutQuantity === 0) {
-      document.querySelector('.js-checkout-header-middle-section').innerHTML =
-        'Checkout (<a class="return-to-home-link" href="amazon.html">...</a>)';
-    } else {
-      document.querySelector('.js-checkout-header-middle-section').innerHTML = `
-        Checkout (<a class="return-to-home-link" href="amazon.html">${checkoutQuantity} items</a>)
-      `;
-    }
-  }
 
   // handles quantity updates
   document.querySelectorAll('.js-update-link').forEach((link) => {
@@ -149,39 +129,35 @@ export function renderOrderSummary() {
     });
   });
 
-  // handles quantity saves
-  document.querySelectorAll('.js-save-link').forEach((link) => {
-    link.addEventListener('click', () => {
-      const productId = link.dataset.productId;
+// handles quantity saves
+document.querySelectorAll('.js-save-link').forEach((link) => {
+  link.addEventListener('click', () => {
+    const productId = link.dataset.productId;
+    const container = document.querySelector(`.js-cart-item-container-${productId}`);
+    const input = container.querySelector('.quantity-input');
 
-      const container = document.querySelector(`.js-cart-item-container-${productId}`);
-      container.classList.remove('is-editing-quantity');
+    const inputString = String(input.value).trim();
+    const quantity = Number.parseInt(inputString, 10);
 
-      const quantityInput = container.querySelector('.quantity-input');
-      const newQuantity = Number(quantityInput.value);
+    if (inputString === '' || !Number.isInteger(quantity) || quantity < 0 || quantity > 1000) {
+      container.classList.add('has-error', 'is-editing-quantity');
+      return;
+    }
+    container.classList.remove('has-error', 'is-editing-quantity');
 
-      let valid = true; 
+    if (quantity === 0) {
+      removeFromCart(productId);
+    } else {
+      updateQuantity(productId, quantity);
+    }
 
-      if (newQuantity === 0) {
-        removeFromCart(productId);
-        container.remove();
-        return; 
-      }
-
-      if (newQuantity < 0 || newQuantity > 1000 || isNaN(newQuantity)) {
-        valid = false;
-        container.classList.add('has-error');
-        container.classList.add('is-editing-quantity');
-      }
-
-      if (valid) {
-        updateQuantity(productId, newQuantity);
-        container.querySelector('.quantity-label').textContent = newQuantity;
-        updateCheckoutQuantity();
-      }
-      renderPaymentSummary();
-    });
+    // re-render
+    renderOrderSummary();
+    renderPaymentSummary();
+    renderCheckoutSummary();
   });
+});
+
 
   // handles changes in the delivery options
   document.querySelectorAll('.delivery-option-input').forEach((element) => {
