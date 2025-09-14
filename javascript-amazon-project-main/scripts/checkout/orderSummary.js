@@ -1,10 +1,9 @@
 import {cart, removeFromCart, updateQuantity, updateDeliveryOption, getShippingCost} from '../../data/cart.js';
 import {products, getProduct, getProductPrice} from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js';
-import { deliveryOptions } from '../../data/deliveryOptions.js';
-import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import { renderPaymentSummary } from './paymentSummary.js';
-import { renderCheckoutSummary } from './checkoutHeader.js';
+import {calculateDeliveryDate} from '../../data/deliveryOptions.js';
+import {renderPaymentSummary} from './paymentSummary.js';
+import {renderCheckoutSummary} from './checkoutHeader.js';
 
 export function renderOrderSummary() {
 
@@ -14,20 +13,17 @@ export function renderOrderSummary() {
     const productId = cartItem.productId;
     let matchingProduct = getProduct(productId);
 
-  // generate the dates 
-  const deliveryOption = deliveryOptions.find(option => option.id === cartItem.deliveryOptionId);
-  const deliveryDate = dayjs().add(deliveryOption.deliveryDays, 'days');
-
-  const deliveryDate1 = dayjs().add(7, 'days');
-  const deliveryDate2 = dayjs().add(3, 'days');
-  const deliveryDate3 = dayjs().add(1, 'days');
+    const deliveryDate = calculateDeliveryDate(cartItem.deliveryOptionId);
+    const deliveryDate1 = calculateDeliveryDate('1');
+    const deliveryDate2 = calculateDeliveryDate('2');
+    const deliveryDate3 = calculateDeliveryDate('3');
 
   // generate the HTML for the cart summary
 
   cartSummaryHTML += `
     <div class="cart-item-container js-cart-item-container-${cartItem.productId}">
       <div class="delivery-date">
-        Delivery date: ${deliveryDate.format('dddd, MMMM D')}
+        Delivery date: ${deliveryDate}
       </div>
 
       <div class="cart-item-details-grid">
@@ -71,7 +67,7 @@ export function renderOrderSummary() {
             data-delivery-option-id="1"
             >
           <div>
-            <div class="delivery-option-date">${deliveryDate1.format('dddd, MMMM D')}</div>
+            <div class="delivery-option-date">${deliveryDate1}</div>
             <div class="delivery-option-price">FREE Shipping</div>
           </div>
         </div>
@@ -84,7 +80,7 @@ export function renderOrderSummary() {
             data-delivery-option-id="2"
             >
           <div>
-            <div class="delivery-option-date">${deliveryDate2.format('dddd, MMMM D')}</div>
+            <div class="delivery-option-date">${deliveryDate2}</div>
             <div class="delivery-option-price">$4.99 - Shipping</div>
           </div>
         </div>
@@ -97,7 +93,7 @@ export function renderOrderSummary() {
             data-delivery-option-id="3"
             >
           <div>
-            <div class="delivery-option-date">${deliveryDate3.format('dddd, MMMM D')}</div>
+            <div class="delivery-option-date">${deliveryDate3}</div>
             <div class="delivery-option-price">$9.99 - Shipping</div>
           </div>
         </div>
