@@ -38,3 +38,17 @@ export function calculateDeliveryDate(deliveryOption) {
     return 'Invalid delivery option';
   }
 }
+
+export function getShippingCostForDeliveryOption(deliveryOptionId) {
+  let shippingCost = 0;
+
+  if (deliveryOptionId === '1') { 
+    shippingCost = 0;
+  } else if (deliveryOptionId === '2') {
+    shippingCost = 499;
+  } else if (deliveryOptionId === '3') {
+    shippingCost = 999;
+  }
+
+  return shippingCost;
+}
